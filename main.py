@@ -1,10 +1,16 @@
 from manimlib import *
 
-
+# YouTube
 # https://3b1b.github.io/manim/
 # manimgl main.py IntegrationByParts
 # manimgl main.py IntegrationByParts -w --prerun -r="2560x1440" --video_dir="./export" --file_name="name" --uhd
 
+# Shorts
+# manimgl main.py IntegrationByParts -r="1080x1920"
+# manimgl main.py IntegrationByParts -w --prerun -r="1080x1920" --video_dir="./export" --file_name="short" -l
+
+# Save last frame image (8K)
+# manimgl main.py IntegrationByParts -so -r="4320x7680"
 
 class IntegrationByParts(Scene):
     def construct(self):
@@ -22,13 +28,16 @@ class IntegrationByParts(Scene):
         # Step 5: Rearrenging
         self.rearrenge_eqation_5()
 
-        # Adjust zoom speed
-        self.play(self.camera.frame.animate.scale(3).move_to(self.eq4), run_time=2)
+        # # Adjust zoom speed
+        # self.play(self.camera.frame.animate.scale(3).move_to(self.eq4), run_time=2)
 
     def write_product_rule_1(self):
         # Point 1
         self.point_1 = Tex("1)")
         self.point_1.to_corner(LEFT + UP)
+
+        # Shorts 9:16 resolution
+        self.camera.frame.scale(3.25, about_point=self.point_1.get_corner(UP+LEFT))
         self.play(Write(self.point_1))
 
         # Equation
@@ -169,11 +178,11 @@ class IntegrationByParts(Scene):
             }
         )
 
-        # Shift the camera down by 2 units over 4 seconds
-        camera_shift = ApplyMethod(self.camera.frame.shift, 5 * DOWN, run_time=3)
+        # # Shift the camera down by 2 units over 4 seconds
+        # camera_shift = ApplyMethod(self.camera.frame.shift, 5 * DOWN, run_time=3)
 
         self.play(
-            camera_shift,
+            # camera_shift,
             TransformFromCopy(self.eq3_copy.copy(), self.eq4, run_time=1.5),
         )
 
@@ -248,9 +257,9 @@ class IntegrationByParts(Scene):
             }
         )
         # Shift the camera down by 2 units over 4 seconds
-        camera_shift = ApplyMethod(self.camera.frame.shift, 4.5 * DOWN, run_time=3)
+        # camera_shift = ApplyMethod(self.camera.frame.shift, 4.5 * DOWN, run_time=3)
         self.play(
-            camera_shift,
+            # camera_shift,
             TransformFromCopy(self.eq4_copy.copy(), self.eq5, run_time=1.5),
         )
         self.wait()
@@ -312,10 +321,10 @@ class IntegrationByParts(Scene):
         self.eq7.align_to(self.eq6, LEFT)
 
         # Shift the camera down by 2 units over 4 seconds
-        camera_shift = ApplyMethod(self.camera.frame.shift, 3.5 * DOWN, run_time=3)
+        # camera_shift = ApplyMethod(self.camera.frame.shift, 3.5 * DOWN, run_time=3)
 
         self.play(
-            camera_shift,
+            # camera_shift,
             TransformFromCopy(self.eq6.copy(), self.eq7, run_time=1.5),
         )
         self.wait()
@@ -350,4 +359,3 @@ class IntegrationByParts(Scene):
 
         self.rect = SurroundingRectangle(self.eq8, DEFAULT_BUFF_RATIO, GREEN_C)
         self.play(Write(self.rect), **{"run_time": 3})
-
